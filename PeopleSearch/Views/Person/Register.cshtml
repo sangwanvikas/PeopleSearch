@@ -1,0 +1,84 @@
+﻿@model PeopleSearch.Models.Person
+
+@{
+    ViewBag.Title = "Register a person";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container registration-container-div">
+    <div class="page-header"><h1>Register</h1></div>
+    <div class="row col-sm-10 ">
+
+      
+
+        <div class="form-inline">
+            <div class="form-group col-sm-6">
+                <input type="text" id="firstName" class="textBox form-control " placeholder="First name" />
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-sm-6  ">
+                <input type="text" id="lastName" class="textBox form-control " placeholder="Last name" />
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-sm-12 top-buffer">
+                <input type="text" id="address" class="textBox form-control" placeholder="Address" />
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-sm-12 top-buffer">
+                <textarea id="hobbies" class="textBox form-control" placeholder="Hobbies"></textarea>
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-sm-12 top-buffer">
+                <label for="formGroupExampleInput">Male:</label>    @Html.RadioButton("Gender", "Male", new { id = "gender" , @checked="ture"})
+                <label for="formGroupExampleInput">Female:</label>  @Html.RadioButton("Gender", "Female", new { id = "gender" })
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-sm-6 top-buffer">
+                <label for="formGroupExampleInput">Birthday</label>
+                <input type="date" id="dob" class="textBox form-control" placeholder="Enter dob" />
+            </div>
+        </div>
+
+        <div class="form-inline">
+            <div class="form-group col-sm-12 top-buffer">
+                <label for="formGroupExampleInput">Image</label>
+                <input type="file" id="attachment" onchange="ChangeAttachment(event)" class="file  input-files cols-sm-9" />
+            </div>
+        </div>
+
+
+        <div class="form-inline">
+            <div class="form-group col-sm-12 top-buffer ">
+                <button id="registerBtn" onclick="RegisterPerson()" class=" btn-danger">Register</button>
+            </div>
+
+            <div class="text-danger" id="validationMessage" ><p>First name and birthday (less than current date & time) can't be left blank.</p></div>
+
+            <div class="alert alert-success" id="successMessage">
+                <strong>Success! Person registered sucessfully.</strong>
+            </div>
+
+            <div class="alert alert-warning" id="errorMessage">
+                <strong>Failure! Unexpected error occured while saving a record.</strong>
+            </div>
+
+
+            
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Common/css")
+@Scripts.Render("~/bundles/common/registerJs")

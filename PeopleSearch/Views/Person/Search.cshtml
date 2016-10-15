@@ -1,0 +1,38 @@
+﻿@model IEnumerable<PeopleSearch.Models.Person>
+
+@{
+    ViewBag.Title = "Search for a person";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container search-container-div">
+    <div class="page-header"><h1>Search</h1></div>
+    <div class="row col-sm-10">      
+        <div class="input-group col-sm-8">
+            <input type="text" id="searchTextBox" class="form-control searchTextBox" placeholder="Enter first name or last name" />
+            <span class="input-group-addon search-span" id="searchBtn" onclick="SearchPerson(event)">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+
+    </div>
+    <div id="spinner">
+        Loading...
+
+        @*<img src="~/Common/css/spinner.gif" />*@
+    </div>
+
+ 
+    <div id="peepleDetails" class="peepleDetails">
+       
+    </div>
+</div>
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Common/css")
+@Scripts.Render("~/bundles/common/searchJs")
+

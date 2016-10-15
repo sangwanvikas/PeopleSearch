@@ -1,0 +1,62 @@
+﻿.search-container-div{
+    /*background-color:skyblue;*/
+}
+
+.page-header{
+    color:black;
+}
+
+.input-group{
+    padding:0px;
+}
+
+.peepleDetails{
+    margin-top:60px;
+    background-color:white;
+}
+
+.search-span:hover {
+    opacity: .8;
+    background-color: dodgerblue;
+}
+
+.search-span {
+    cursor: pointer;
+    background-color: cornflowerblue;
+}
+
+.search-link {
+    background-color: #d9534f;
+}
+
+.search-btn {
+    border: none;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+
+div#spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: url('../images/spinner.gif') no-repeat center rgba(50,50,50,0.5);
+    background-size: 100px;
+    text-align: center;
+    font: normal 16px Tahoma, Geneva, sans-serif;
+    border: 1px solid #666;
+    z-index: 2;
+    overflow: auto;
+    /*background: rgba(50,50,50,0.5);*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+

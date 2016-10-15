@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Web;
+
+namespace PeopleSearch.Models
+{
+    public class Person
+    {   
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string Address { get; set; }
+        public string Hobbies { get; set; }
+        public byte[] Image { get; set; }
+        public string Gender { get; set; }
+
+        public Person()
+        {
+            FirstName = default(string);
+            LastName = default(string);
+            DateOfBirth = default(DateTime);
+            Address = default(string);
+            Hobbies = default(string);
+            Gender = default(string);
+            Image = null;
+        }
+    }
+
+
+}
+
