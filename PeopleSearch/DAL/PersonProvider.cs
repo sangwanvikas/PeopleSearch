@@ -8,26 +8,41 @@ namespace PeopleSearch.DAL
 {
     public static class PersonProvider
     {
-        public static void Store(Person person)
+        public static void Create(Person person)
         {
-            using (var db = new PersonContext())
+            try
             {
-                db.Persons.Add(person);
-                db.SaveChanges();
+                using (var db = new PersonContext())
+                {
+                    db.Persons.Add(person);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
 
 
-        public static List<Person> GetPersonByName(string name)
+        public static List<Person> SearchByName(string name)
         {
-            using (var context = new PersonContext())
+            try
             {
-                var persons = from b in context.Persons
-                              where b.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
-                              || b.LastName.ToLower().Contains(name.ToLower().Trim())
-                              select b;
+                using (var context = new PersonContext())
+                {
+                    var persons = from b in context.Persons
+                                  where b.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
+                                  || b.LastName.ToLower().Contains(name.ToLower().Trim())
+                                  select b;
 
-                return persons.ToList();
+                    return persons.ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

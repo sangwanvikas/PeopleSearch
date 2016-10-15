@@ -10,28 +10,48 @@ using System.Xml.Linq;
 
 namespace PeopleSearch.DAL
 {
-    public class PersonDBInitializer : DropCreateDatabaseAlways<PersonContext>
+    public class PersonDBInitializer : CreateDatabaseIfNotExists<PersonContext>
     {
         protected override void Seed(PersonContext context)
         {
-            IList<Person> defaultPersons = GetSeedPersons();
+            try
+            {
+                IList<Person> defaultPersons = GetSeedPersons();
 
-            foreach (Person person in defaultPersons)
-                context.Persons.Add(person);
+                foreach (Person person in defaultPersons)
+                    context.Persons.Add(person);
 
-            base.Seed(context);
+                base.Seed(context);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public List<Person> GetSeedPersons()
         {
-            List<Person> seedPersons = new List<Person>();
+            // Virtual path (of a directory) on server which contains XML for persons' information.
+            string seedDataXmlFilePath = HttpContext.Current.Server.MapPath(Constants.SeedDataXmlFilePath);
+            List<Person> seedPersons = GetPersonsFromXmlFile(seedDataXmlFilePath);
 
-            string imageDirectoryAbsolutePath = HttpContext.Current.Server.MapPath(Constants.ImageDirectoryLoalPath);
+            return seedPersons;
+        }
 
-            string seedDataDirectoryAbsolutePath = HttpContext.Current.Server.MapPath(Constants.SeedDataDirectoryLocalFilePath);
-            XDocument personXmlAbsoluteFilePath = XDocument.Load(Path.Combine(seedDataDirectoryAbsolutePath, Constants.PersonXmlFileName));
+        public List<Person> GetPersonsFromXmlFile(string path)
+        {
+            List<Person> persons = new List<Person>();
 
-            foreach (var DetailNode in personXmlAbsoluteFilePath.Descendants(Constants.DetailsNode))
+            // Load seed data file : ~/Resources/SeedData/Person.xml
+            XDocument xmlDoc = XDocument.Load(Path.Combine(path, Constants.PersonXmlFileName));
+
+            // Virtual path (of a directory) on server which contains images for persons.
+            string imageDirectoryPath = HttpContext.Current.Server.MapPath(Constants.ImageDirectoryPath);
+
+            // Iterate over each <detail> tag in xmlDoc to get person information.
+            foreach (var DetailNode in xmlDoc.Descendants(Constants.DetailsNode))
             {
                 Person person = new Person();
                 person.FirstName = DetailNode.Element(Constants.FirstNameNode).Value;
@@ -42,13 +62,16 @@ namespace PeopleSearch.DAL
                 person.Gender = DetailNode.Element(Constants.GenderNode).Value;
 
                 string imageName = DetailNode.Element(Constants.ImageNameNode).Value;
-                string imageAbsolutePath = Path.Combine(imageDirectoryAbsolutePath, imageName);
-                person.Image = GetImageBytes(imageAbsolutePath);
 
-                seedPersons.Add(person);
+                // Virtual path of image file on server for the given <imagename>
+                string imagePath = Path.Combine(imageDirectoryPath, imageName);
+
+                person.Image = GetImageBytes(imagePath);
+
+                persons.Add(person);
             }
 
-            return seedPersons;
+            return persons;
         }
 
         public byte[] GetImageBytes(string path)

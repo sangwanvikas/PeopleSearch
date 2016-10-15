@@ -9,6 +9,21 @@ namespace PeopleSearch.ServiceFactory
 {
     public static class PersonManager
     {
+
+        public static void Create(PersonViewModel personViewModel, byte[] imageBytes)
+        {
+            try
+            {
+                Person person = GetPerson(personViewModel, imageBytes);
+                PersonService.Create(person);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public static Person GetPerson(PersonViewModel personViewModel, byte[] imageBytes)
         {
             var person = new Person();
@@ -23,7 +38,25 @@ namespace PeopleSearch.ServiceFactory
             return person;
         }
 
-        public static List<PersonViewModel> GetPersonViewModels(List<Person> persons)
+
+
+        public static List<PersonViewModel> Search(string name)
+        {
+            try
+            {
+                List<Person> persons = PersonService.Search(name);
+                List<PersonViewModel> personViewModelList = PopulatePersonViewModelList(persons);
+
+                return personViewModelList;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<PersonViewModel> PopulatePersonViewModelList(List<Person> persons)
         {
             List<PersonViewModel> personViewModelList = new List<PersonViewModel>();
 
@@ -36,7 +69,7 @@ namespace PeopleSearch.ServiceFactory
                 personViewModel.DateOfBirth = person.DateOfBirth;
                 personViewModel.Hobbies = person.Hobbies;
                 personViewModel.Gender = person.Gender;
-                personViewModel.Age = (float)(DateTime.Now.Month - person.DateOfBirth.Month)/12;
+                personViewModel.Age = (float)(DateTime.Now.Month - person.DateOfBirth.Month) / 12;
 
                 if (person.Image != null)
                 {
@@ -47,12 +80,9 @@ namespace PeopleSearch.ServiceFactory
                 }
 
                 personViewModelList.Add(personViewModel);
-
             }
 
             return personViewModelList;
-
-
         }
     }
 }

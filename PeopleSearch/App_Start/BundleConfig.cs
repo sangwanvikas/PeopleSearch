@@ -32,8 +32,6 @@ namespace PeopleSearch
                        "~/Common/css/search.css",
                         "~/Common/css/result.css"));
 
-
-
             bundles.Add(new ScriptBundle("~/bundles/common/registerJs").Include(
                                   "~/Common/js/register.js"));
 

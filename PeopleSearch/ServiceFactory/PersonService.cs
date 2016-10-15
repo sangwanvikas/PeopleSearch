@@ -14,12 +14,12 @@ namespace PeopleSearch.ServiceFactory
 
         public static void Create(Person person)
         {
-            PersonProvider.Store(person);
+            PersonProvider.Create(person);
         }
 
-        public static List<Person> Find(string name)
+        public static List<Person> Search(string name)
         {
-            return PersonProvider.GetPersonByName(name);
+            return PersonProvider.SearchByName(name);
         }
 
     }

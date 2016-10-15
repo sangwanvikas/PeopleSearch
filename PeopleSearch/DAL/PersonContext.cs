@@ -9,8 +9,8 @@ namespace PeopleSearch.DAL
 {
     public class PersonContext : DbContext
     {
-        public PersonContext(): base("PersonContext") 
-    {
+        public PersonContext() : base("PersonContext")
+        {
             Database.SetInitializer(new PersonDBInitializer());
 
         }

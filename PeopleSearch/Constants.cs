@@ -10,8 +10,8 @@ namespace PeopleSearch
     public class Constants
     {
         // To load seed data (Location ~/Resources)
-        public static string ImageDirectoryLoalPath = @"~/Resources/Images/";
-        public static string SeedDataDirectoryLocalFilePath = @"~/Resources/SeedData/";
+        public static string ImageDirectoryPath = @"~/Resources/Images/";
+        public static string SeedDataXmlFilePath = @"~/Resources/SeedData/";
         public static string PersonXmlFileName = @"Persons.xml";
         public static string PersonNode = @"person";
         public static string DetailsNode = @"detail";

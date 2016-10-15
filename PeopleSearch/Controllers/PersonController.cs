@@ -16,10 +16,17 @@ namespace PeopleSearch.Controllers
 
         public ActionResult Index()
         {
-            // db.Person.ToList()
-            IEnumerable<Person> persons = new List<Person>();
-            return View(persons);
-            // return PartialView("~/Views/Person/_Search.cshtml", new Person("fname", "lname", "dob", "add", new byte[10]));
+            try
+            {
+                IEnumerable<Person> persons = new List<Person>();
+                return View(persons);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         public ActionResult Register()
@@ -37,21 +44,18 @@ namespace PeopleSearch.Controllers
         [HttpGet]
         public ActionResult Result(string name)
         {
-            List<Person> persons = PersonService.Find(name);
-            List<PersonViewModel> resultPersons = PersonManager.GetPersonViewModels(persons);
+            List<PersonViewModel> resultPersons = PersonManager.Search(name);
 
             return View(resultPersons);
         }
 
         #endregion
 
-
         #region Create record in DB
         [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
-            Person person = PersonManager.GetPerson(personViewModel, imageBytes);
-            PersonService.Create(person);
+            PersonManager.Create(personViewModel, imageBytes);
 
             return Json(new Person());
         }
@@ -66,10 +70,6 @@ namespace PeopleSearch.Controllers
         }
 
         #endregion
-
-        public ActionResult Test(Person person)
-        {
-            return Json(person);
-        }
+        
     }
 }
