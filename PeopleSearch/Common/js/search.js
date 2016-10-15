@@ -3,14 +3,12 @@ function SearchPerson(e) {
     var name = { 'name': $('#searchTextBox').val(), 'isExactMatchRequested': false };
     showProgress();
     $.ajax({
-        url: "/Person/Find",
+        url: "/Person/Result",
         type: "GET",
         data: name,
         success: function (msg) {
             hideProgress();
-            $('#peepleDetails').html(msg);
-         
-            
+            $('#peepleDetails').html(msg);            
         },
         error: function (f) {
             console.log(f);

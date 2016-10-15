@@ -44,7 +44,7 @@ div#spinner {
     position: fixed;
     top: 50%;
     left: 50%;
-    background: url('../images/spinner.gif') no-repeat center rgba(50,50,50,0.5);
+    background: url('../../Resources/Images/spinner.gif') no-repeat center rgba(50,50,50,0.5);
     background-size: 100px;
     text-align: center;
     font: normal 16px Tahoma, Geneva, sans-serif;

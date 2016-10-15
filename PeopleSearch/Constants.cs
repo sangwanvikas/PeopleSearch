@@ -9,8 +9,20 @@ namespace PeopleSearch
 {
     public class Constants
     {
-        public static string AlbertEinsteinImageName = @"Albert_Einstein.jpg";
-        public static string ImagesReferencePath = @"Common\images";
-        public static string ProjectPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        // To load seed data (Location ~/Resources)
+        public static string ImageDirectoryLoalPath = @"~/Resources/Images/";
+        public static string SeedDataDirectoryLocalFilePath = @"~/Resources/SeedData/";
+        public static string PersonXmlFileName = @"Persons.xml";
+        public static string PersonNode = @"person";
+        public static string DetailsNode = @"detail";
+        public static string FirstNameNode = @"firstname";
+        public static string LastNameNode = @"lastname";
+        public static string AddressNode = @"address";
+        public static string DateOfBirthNode = @"dataofbirth";
+        public static string HobbiesNode = @"hobbies";
+        public static string GenderNode = @"gender";
+        public static string ImageNameNode = @"imagename";
+
+
     }
 }

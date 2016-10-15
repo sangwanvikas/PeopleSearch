@@ -177,8 +177,6 @@
     </Compile>
     <Compile Include="Helper\ImageHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Image.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -189,18 +187,25 @@
     <Compile Include="ViewModels\Test.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Common\css\find.css" />
+    <Content Include="Common\css\result.css" />
     <Content Include="Common\css\register.css" />
     <Content Include="Common\css\search.css" />
-    <Content Include="Common\images\spinner.gif" />
     <Content Include="Common\js\register.js" />
     <Content Include="Common\js\search.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Resources\images\ImageMetaData.xml" />
-    <Content Include="Resources\images\spinner.gif" />
+    <Content Include="Resources\Images\Albert_Einstein.jpg" />
+    <Content Include="Resources\Images\Benjamin_Franklin.jpg" />
+    <Content Include="Resources\Images\Compton_Tucker.jpg" />
+    <Content Include="Resources\Images\Marie_Curie.jpg" />
+    <Content Include="Resources\Images\Raymond_Davis.jpg" />
+    <Content Include="Resources\Images\Rosalind_Franklin.jpg" />
+    <Content Include="Resources\Images\Stephen_Hawking.jpg" />
+    <Content Include="Resources\Images\Vint_Cerf.jpg" />
+    <Content Include="Resources\SeedData\Persons.xml" />
+    <Content Include="Resources\Images\spinner.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -229,8 +234,8 @@
     <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Person\Search.cshtml" />
-    <Content Include="Views\Person\Find.cshtml" />
     <Content Include="Views\Person\Register.cshtml" />
+    <Content Include="Views\Person\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

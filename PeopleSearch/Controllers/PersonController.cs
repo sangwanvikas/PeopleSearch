@@ -35,7 +35,7 @@ namespace PeopleSearch.Controllers
         }
 
         [HttpGet]
-        public ActionResult Find(string name)
+        public ActionResult Result(string name)
         {
             List<Person> persons = PersonService.Find(name);
             List<PersonViewModel> resultPersons = PersonManager.GetPersonViewModels(persons);

@@ -28,6 +28,17 @@ namespace PeopleSearch.Models
             Gender = default(string);
             Image = null;
         }
+
+        public Person(string firstName, string lastName, string address, string hobbies, DateTime dateOfBirth, string gender)
+        {
+            FirstName = default(string);
+            LastName = default(string);
+            DateOfBirth = default(DateTime);
+            Address = default(string);
+            Hobbies = default(string);
+            Gender = default(string);
+            Image = null;
+        }
     }
 
 

@@ -30,7 +30,7 @@ namespace PeopleSearch
             bundles.Add(new StyleBundle("~/Common/css").Include(
                       "~/Common/css/register.css",
                        "~/Common/css/search.css",
-                        "~/Common/css/find.css"));
+                        "~/Common/css/result.css"));
 
 
 
