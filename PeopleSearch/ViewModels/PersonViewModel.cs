@@ -17,5 +17,21 @@ namespace PeopleSearch.ViewModels
         public string Gender { get; set; }
         public float Age { get; set; }
 
+        public PersonViewModel()
+        {
+
+        }
+
+        public PersonViewModel(string firstName, string lastName, DateTime dateOfBirth, string address, string image, string gender)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Address = address;
+            Image = image;
+            Hobbies = Hobbies;
+            Gender = gender;
+        }
+
     }
 }

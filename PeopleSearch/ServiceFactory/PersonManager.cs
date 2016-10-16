@@ -1,4 +1,5 @@
-﻿using PeopleSearch.Models;
+﻿using PeopleSearch.DAL;
+using PeopleSearch.Models;
 using PeopleSearch.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,20 +10,18 @@ namespace PeopleSearch.ServiceFactory
 {
     public static class PersonManager
     {
-
-        public static void Create(PersonViewModel personViewModel, byte[] imageBytes)
+        public static int Create(PersonViewModel personViewModel, byte[] imageBytes)
         {
             try
             {
                 Person person = GetPerson(personViewModel, imageBytes);
-                PersonService.Create(person);
+                return PersonProvider.Create(person);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-
 
         public static Person GetPerson(PersonViewModel personViewModel, byte[] imageBytes)
         {
@@ -37,8 +36,6 @@ namespace PeopleSearch.ServiceFactory
 
             return person;
         }
-
-
 
         public static List<PersonViewModel> Search(string name)
         {

@@ -12,9 +12,9 @@ namespace PeopleSearch.ServiceFactory
     public static class PersonService
     {
 
-        public static void Create(Person person)
+        public static int Create(Person person)
         {
-            PersonProvider.Create(person);
+            return PersonProvider.Create(person);
         }
 
         public static List<Person> Search(string name)

@@ -8,7 +8,7 @@ namespace PeopleSearch.DAL
 {
     public static class PersonProvider
     {
-        public static void Create(Person person)
+        public static int Create(Person person)
         {
             try
             {
@@ -16,11 +16,12 @@ namespace PeopleSearch.DAL
                 {
                     db.Persons.Add(person);
                     db.SaveChanges();
+                    return person.Id;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
@@ -31,10 +32,30 @@ namespace PeopleSearch.DAL
             {
                 using (var context = new PersonContext())
                 {
-                    var persons = from b in context.Persons
-                                  where b.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
-                                  || b.LastName.ToLower().Contains(name.ToLower().Trim())
-                                  select b;
+                    var persons = from person in context.Persons
+                                  where person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
+                                  || person.LastName.ToLower().Contains(name.ToLower().Trim())
+                                  select person;
+
+                    return persons.ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public static List<Person> SearchById(int id)
+        {
+            try
+            {
+                using (var context = new PersonContext())
+                {
+                    var persons = from person in context.Persons
+                                  where person.Id == id
+                                  select person;
 
                     return persons.ToList();
                 }

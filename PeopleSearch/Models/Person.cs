@@ -39,6 +39,18 @@ namespace PeopleSearch.Models
             Gender = default(string);
             Image = null;
         }
+
+        public bool Equals (Person person){
+
+            return FirstName.Equals(person.FirstName)
+                && LastName.Equals(person.LastName)
+                && Address.Equals(person.Address)
+                && DateOfBirth.Equals(person.DateOfBirth)
+                && Hobbies.Equals(person.Hobbies)
+                && Gender.Equals(person.Gender)
+                && Image.Equals(person.Image);
+        }
+
     }
 
 

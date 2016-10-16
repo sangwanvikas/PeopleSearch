@@ -55,7 +55,7 @@ namespace PeopleSearch.Controllers
         [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
-            PersonManager.Create(personViewModel, imageBytes);
+            int id = PersonManager.Create(personViewModel, imageBytes);
 
             return Json(new Person());
         }
