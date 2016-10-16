@@ -22,53 +22,25 @@ namespace PeopleSearch.DAL
 
         public int Create(Person person)
         {
-            try
-            {
-                _db.Persons.Add(person);
-                _db.SaveChanges();
+            _db.Persons.Add(person);
+            _db.SaveChanges();
 
-                return person.Id;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return person.Id;
         }
 
 
         public List<Person> SearchByName(string name)
         {
-            try
-            {
-                var persons = from person in _db.Persons
-                              where person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
-                              || person.LastName.ToLower().Contains(name.ToLower().Trim())
-                              select person;
+            //person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
+            //             || person.LastName.ToLower().Contains(name.ToLower().Trim())
+            //              select person;
 
-                return persons.ToList();
-            }
-            catch (Exception)
-            {
+            List<Person> persons = _db.Persons
+                                    .Where(p => p.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
+                                        || p.LastName.ToLower().Trim().Contains(name.ToLower().Trim()))
+                                    .Select(p => p).ToList();
 
-                throw;
-            }
-        }
-
-        public List<Person> SearchById(int id)
-        {
-            try
-            {
-                var persons = from person in _db.Persons
-                              where person.Id == id
-                              select person;
-
-                return persons.ToList();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            return persons.ToList();
         }
     }
 }

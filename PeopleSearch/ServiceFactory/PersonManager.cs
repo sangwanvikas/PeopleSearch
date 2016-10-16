@@ -19,12 +19,6 @@ namespace PeopleSearch.ServiceFactory
             _personService = new PersonService(_db);
         }
 
-        public PersonManager(PersonContext db)
-        {
-            _db = db;
-        }
-
-
         public int Create(PersonViewModel personViewModel, byte[] imageBytes)
         {
             try
@@ -40,16 +34,31 @@ namespace PeopleSearch.ServiceFactory
 
         public Person GetPerson(PersonViewModel personViewModel, byte[] imageBytes)
         {
-            var person = new Person();
-            person.FirstName = personViewModel.FirstName;
-            person.LastName = personViewModel.LastName;
-            person.Address = personViewModel.Address;
-            person.DateOfBirth = personViewModel.DateOfBirth;
-            person.Image = imageBytes;
-            person.Hobbies = personViewModel.Hobbies;
-            person.Gender = personViewModel.Gender;
+            try
+            {
+                if (string.IsNullOrEmpty(personViewModel.FirstName) && string.IsNullOrEmpty(personViewModel.LastName))
+                {
+                    return null;
+                }
+                else
+                {
+                    var person = new Person();
+                    person.FirstName = personViewModel.FirstName;
+                    person.LastName = personViewModel.LastName;
+                    person.Address = personViewModel.Address;
+                    person.DateOfBirth = personViewModel.DateOfBirth;
+                    person.Image = imageBytes;
+                    person.Hobbies = personViewModel.Hobbies;
+                    person.Gender = personViewModel.Gender;
 
-            return person;
+                    return person;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public List<PersonViewModel> Search(string name)

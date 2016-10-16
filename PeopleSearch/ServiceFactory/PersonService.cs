@@ -12,33 +12,35 @@ namespace PeopleSearch.ServiceFactory
     public class PersonService
     {
         PersonProvider _provider;
-       // PersonContext _context;
-
-        public PersonService()
-        {
-         //   _context = new PersonContext();
-            _provider = new PersonProvider();
-        }
 
         public PersonService(PersonContext db)
         {
-            //   _context = new PersonContext();
             _provider = new PersonProvider(db);
         }
 
         public int Create(Person person)
         {
-            return _provider.Create(person);
+            if (person != null)
+            {
+                if (string.IsNullOrEmpty(person.FirstName) && string.IsNullOrEmpty(person.LastName))
+
+                    return -1;
+                else
+
+                    return _provider.Create(person);
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public List<Person> Search(string name)
         {
-            return _provider.SearchByName(name);
-        }
-
-        public List<Person> Search(int id)
-        {
-            return _provider.SearchById(id);
+            if (!string.IsNullOrEmpty(name))
+                return _provider.SearchByName(name);
+            else
+                return null;
         }
 
     }

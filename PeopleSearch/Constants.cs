@@ -23,6 +23,16 @@ namespace PeopleSearch
         public static string GenderNode = @"gender";
         public static string ImageNameNode = @"imagename";
 
+        public static string ConnectionString = @"ConnectionString";
+        public static string Equal = @"=";
+        public static string DataSource = "DataSource";
+        public static string Database = "Database";
+        public static string IntegratedSecurity = @"IntegratedSecurity";
+        public static string SemiColon = @";";
+        public static string ForwardSlash { get; set; }
+
+
+
 
     }
 }

@@ -1,13 +1,82 @@
-﻿@model IEnumerable<PeopleSearch.Models.Person>
-
+﻿@model PeopleSearch.ViewModels.ConnectionStringViewModel
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("SetConnectionString", "Person", FormMethod.Post))
+{
+    @*// "connectionString=Data Source=LENOVO-PC\SQLEXPRESS;Database=person;Integrated Security=True"*@
+    <div class="page-header"><h1>Connection String</h1></div>
+    <div class="container">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Sql Server name:", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.ServerNameValue, new { maxlength = "255", placeholder = "Enter SqlServer name", @class = "input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.ServerNameValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Sql Instances:", new { @class = "" })
+            </div>
+            <div class="col-sm-9">
+                @Html.DropDownListFor(model => model.SqlServerInstances, new SelectList(Model.SqlServerInstances), new {@id="dropDown", @class = "input-xlarge-fluid" })
+                <label for="formGroupExampleInput">Custom value:</label>
+                @Html.CheckBoxFor(Model => Model.isCustomInstance, new { id = "isCustomInstance", @selected = "false" })
+
+                @Html.TextBoxFor(model => model.SqlServerInstanveValue, new { @id = "instanceValue", @disabled = "true", maxlength = "255", placeholder = "Enter instance name", @class = "input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.SqlServerInstanveValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label("Database name:")
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.DatabaseValue, new { maxlength = "255", placeholder = "Database name", @class = "input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.DatabaseValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label("Integrated Security:")
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.IntegratedSecurityValue, new { disabled = true, maxlength = "255", placeholder = "Integrated Security", @class = "input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.IntegratedSecurityValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <button type="submit">Configure SqlServer</button>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Styles.Render("~/Common/css")
+@Scripts.Render("~/bundles/common/registerJs")
+
+<script>
+    $("#isCustomInstance").change(function () {
+        console.log(this.checked)
+        if (this.checked) {
+            $('#instanceValue').attr("disabled", false);
+        } else {
+            $('#instanceValue').attr("disabled", true);
+        }
+    });
+
+    $("#dropDown").change(function () {
+        console.log($('#dropDown option:selected').val());
+        
+        $('#instanceValue').val($('#dropDown option:selected').val());
+    });
+</script>
 

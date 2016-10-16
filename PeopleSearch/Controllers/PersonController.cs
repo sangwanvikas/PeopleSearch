@@ -7,6 +7,9 @@ using PeopleSearch.ServiceFactory;
 using System.Collections.Generic;
 using System;
 using PeopleSearch.Helper;
+using Microsoft.Win32;
+using System.Web.Configuration;
+using System.Configuration;
 
 namespace PeopleSearch.Controllers
 {
@@ -14,13 +17,19 @@ namespace PeopleSearch.Controllers
     {
         public static byte[] imageBytes;
 
-        PersonManager manager;
+        PersonManager _personManager;
+
         public ActionResult Index()
         {
             try
             {
-                IEnumerable<Person> persons = new List<Person>();
-                return View(persons);
+                ConnectionStringViewModel conStringVM = new ConnectionStringViewModel();
+                conStringVM.ServerNameValue = ConnectionStringHelper.GetServerName();
+                conStringVM.SqlServerInstances = ConnectionStringHelper.GetSqlInstanceNames();
+                conStringVM.DatabaseValue = @"person";
+                conStringVM.IntegratedSecurityValue = true;
+
+                return View(conStringVM);
             }
             catch (Exception)
             {
@@ -30,23 +39,35 @@ namespace PeopleSearch.Controllers
 
         }
 
+        #region ConnectionString
+        public ActionResult SetConnectionString(ConnectionString conStringVM)
+        {
+            return Json(conStringVM);
+        }
+        #endregion
+
+
+        #region Navigation buttons
         public ActionResult Register()
         {
             return View(new Person());
         }
 
-        #region Search-Main page, and Find-Partial page
         public ActionResult Search()
         {
             IEnumerable<Person> persons = new List<Person>();
             return View(persons);
         }
 
+        #endregion
+
+        #region Search and Results
+
         [HttpGet]
         public ActionResult Result(string name)
         {
-            manager = new PersonManager();
-            List<PersonViewModel> resultPersons = manager.Search(name);
+            _personManager = new PersonManager();
+            List<PersonViewModel> resultPersons = _personManager.Search(name);
 
             return View(resultPersons);
         }
@@ -57,8 +78,8 @@ namespace PeopleSearch.Controllers
         [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
-            manager = new PersonManager();
-            int id = manager.Create(personViewModel, imageBytes);
+            _personManager = new PersonManager();
+            int id = _personManager.Create(personViewModel, imageBytes);
 
             return Json(new Person());
         }
