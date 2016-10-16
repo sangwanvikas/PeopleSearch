@@ -15,6 +15,7 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\PeopleSearch.pdb
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Antlr3.Runtime.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.MoqHelper.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.SqlServer.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.AspNet.Identity.EntityFramework.dll
@@ -30,6 +31,7 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Moq.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Newtonsoft.Json.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Owin.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.Helpers.dll
@@ -40,7 +42,9 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.WebPages.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.WebPages.Razor.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\WebGrease.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.MoqHelper.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Moq.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.Helpers.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.Mvc.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.Optimization.xml
@@ -66,3 +70,4 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.pdb
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.csprojResolveAssemblyReference.cache

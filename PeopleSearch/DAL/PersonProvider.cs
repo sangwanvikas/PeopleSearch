@@ -1,23 +1,33 @@
 ﻿using PeopleSearch.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace PeopleSearch.DAL
 {
-    public static class PersonProvider
+    public class PersonProvider
     {
-        public static int Create(Person person)
+        private PersonContext _db;
+
+        public PersonProvider()
+        {
+        }
+
+        public PersonProvider(PersonContext db)
+        {
+            _db = db;
+        }
+
+        public int Create(Person person)
         {
             try
             {
-                using (var db = new PersonContext())
-                {
-                    db.Persons.Add(person);
-                    db.SaveChanges();
-                    return person.Id;
-                }
+                _db.Persons.Add(person);
+                _db.SaveChanges();
+
+                return person.Id;
             }
             catch (Exception ex)
             {
@@ -26,19 +36,16 @@ namespace PeopleSearch.DAL
         }
 
 
-        public static List<Person> SearchByName(string name)
+        public List<Person> SearchByName(string name)
         {
             try
             {
-                using (var context = new PersonContext())
-                {
-                    var persons = from person in context.Persons
-                                  where person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
-                                  || person.LastName.ToLower().Contains(name.ToLower().Trim())
-                                  select person;
+                var persons = from person in _db.Persons
+                              where person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
+                              || person.LastName.ToLower().Contains(name.ToLower().Trim())
+                              select person;
 
-                    return persons.ToList();
-                }
+                return persons.ToList();
             }
             catch (Exception)
             {
@@ -47,18 +54,15 @@ namespace PeopleSearch.DAL
             }
         }
 
-        public static List<Person> SearchById(int id)
+        public List<Person> SearchById(int id)
         {
             try
             {
-                using (var context = new PersonContext())
-                {
-                    var persons = from person in context.Persons
-                                  where person.Id == id
-                                  select person;
+                var persons = from person in _db.Persons
+                              where person.Id == id
+                              select person;
 
-                    return persons.ToList();
-                }
+                return persons.ToList();
             }
             catch (Exception)
             {

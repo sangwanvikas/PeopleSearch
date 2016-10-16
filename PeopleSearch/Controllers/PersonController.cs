@@ -14,6 +14,7 @@ namespace PeopleSearch.Controllers
     {
         public static byte[] imageBytes;
 
+        PersonManager manager;
         public ActionResult Index()
         {
             try
@@ -26,7 +27,7 @@ namespace PeopleSearch.Controllers
 
                 throw;
             }
-            
+
         }
 
         public ActionResult Register()
@@ -44,7 +45,8 @@ namespace PeopleSearch.Controllers
         [HttpGet]
         public ActionResult Result(string name)
         {
-            List<PersonViewModel> resultPersons = PersonManager.Search(name);
+            manager = new PersonManager();
+            List<PersonViewModel> resultPersons = manager.Search(name);
 
             return View(resultPersons);
         }
@@ -55,7 +57,8 @@ namespace PeopleSearch.Controllers
         [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
-            int id = PersonManager.Create(personViewModel, imageBytes);
+            manager = new PersonManager();
+            int id = manager.Create(personViewModel, imageBytes);
 
             return Json(new Person());
         }
@@ -70,6 +73,6 @@ namespace PeopleSearch.Controllers
         }
 
         #endregion
-        
+
     }
 }

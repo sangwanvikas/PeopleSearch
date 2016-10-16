@@ -10,6 +10,9 @@ using PeopleSearch.Models;
 using PeopleSearch.ServiceFactory;
 using PeopleSearch.ViewModels;
 using PeopleSearch.DAL;
+//using EntityFramework;
+using System.Data.Entity;
+using Moq;
 
 namespace PeopleSearch.Tests.Controllers
 {
@@ -28,9 +31,10 @@ namespace PeopleSearch.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+        
 
         [TestMethod]
-        public void TestCreateMethod_PersonManagerClass_SavePersonWithImage()
+        public void TestCreateMethod_PersonServiceClass_SavePersonWithImage()
         {
             // Arrange
             Person inputPerson = new Person();
@@ -40,24 +44,30 @@ namespace PeopleSearch.Tests.Controllers
             inputPerson.Gender = "Male";
             inputPerson.Hobbies = "my hobbies";
             inputPerson.DateOfBirth = DateTime.Now;
+            
+            
+            var mockSet = new Mock<DbSet<Person>>();
+            var mockContext = new Mock<PersonContext>();
+            mockContext.Setup(m => m.Persons).Returns(mockSet.Object);
 
-            PersonViewModel inputPersonViewModel = new PersonViewModel(inputPerson.FirstName,
-                inputPerson.LastName, inputPerson.DateOfBirth, inputPerson.Address, "", inputPerson.Gender);
+
 
             // Act
-            int personId = PersonManager.Create(inputPersonViewModel, new byte[1]);
-            List<Person> resultPersons = PersonProvider.SearchById(personId);
+            var service = new PersonService(mockContext.Object);
+            service.Create(inputPerson);
 
             // Assert
-            if (resultPersons.Count != 1)
-            {
-                Assert.Fail();
-            }
+            mockSet.Verify(m => m.Add(It.IsAny<Person>()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
 
-            Assert.IsTrue(inputPerson.Equals(resultPersons));
 
-            
+
+
+
+
+
         }
+
 
 
     }

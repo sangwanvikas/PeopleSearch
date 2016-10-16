@@ -16,16 +16,7 @@ namespace PeopleSearch.DAL
 
         }
 
-        public DbSet<Person> Persons { get; set; }
-
-        //public int Create(Person person)
-        //{
-        //    Persons.Add(person);
-        //    SaveChanges();
-
-        //    return person.Id;
-            
-        //}
+        public virtual DbSet<Person> Persons { get; set; }
 
     }
 }

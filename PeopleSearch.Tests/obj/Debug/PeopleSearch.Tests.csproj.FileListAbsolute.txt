@@ -13,8 +13,11 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.T
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\PeopleSearch.Tests.dll.config
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\PeopleSearch.Tests.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\PeopleSearch.Tests.pdb
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Castle.Core.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Moq.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Newtonsoft.Json.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\PeopleSearch.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\System.Web.Helpers.dll
@@ -31,8 +34,11 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.T
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Owin.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\PeopleSearch.pdb
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Castle.Core.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Moq.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\System.Web.Helpers.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\System.Web.Mvc.xml
@@ -47,9 +53,7 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.T
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.Owin.Security.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\obj\Debug\PeopleSearch.Tests.csprojResolveAssemblyReference.cache
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\obj\Debug\PeopleSearch.Tests.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\obj\Debug\PeopleSearch.Tests.pdb
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch.Tests\bin\Debug\EntityFramework.dll

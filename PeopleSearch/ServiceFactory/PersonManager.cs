@@ -8,14 +8,29 @@ using System.Web;
 
 namespace PeopleSearch.ServiceFactory
 {
-    public static class PersonManager
+    public class PersonManager
     {
-        public static int Create(PersonViewModel personViewModel, byte[] imageBytes)
+        PersonContext _db;
+        PersonService _personService;
+
+        public PersonManager()
+        {
+            _db = new PersonContext();
+            _personService = new PersonService(_db);
+        }
+
+        public PersonManager(PersonContext db)
+        {
+            _db = db;
+        }
+
+
+        public int Create(PersonViewModel personViewModel, byte[] imageBytes)
         {
             try
             {
                 Person person = GetPerson(personViewModel, imageBytes);
-                return PersonProvider.Create(person);
+                return _personService.Create(person);
             }
             catch (Exception ex)
             {
@@ -23,7 +38,7 @@ namespace PeopleSearch.ServiceFactory
             }
         }
 
-        public static Person GetPerson(PersonViewModel personViewModel, byte[] imageBytes)
+        public Person GetPerson(PersonViewModel personViewModel, byte[] imageBytes)
         {
             var person = new Person();
             person.FirstName = personViewModel.FirstName;
@@ -37,11 +52,11 @@ namespace PeopleSearch.ServiceFactory
             return person;
         }
 
-        public static List<PersonViewModel> Search(string name)
+        public List<PersonViewModel> Search(string name)
         {
             try
             {
-                List<Person> persons = PersonService.Search(name);
+                List<Person> persons = _personService.Search(name);
                 List<PersonViewModel> personViewModelList = PopulatePersonViewModelList(persons);
 
                 return personViewModelList;
