@@ -22,6 +22,7 @@ namespace PeopleSearch.Tests.Controllers
         {
             controller = new PersonController();
         }
+
         [TestMethod]
         public void Index()
         {

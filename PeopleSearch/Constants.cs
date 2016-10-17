@@ -23,6 +23,7 @@ namespace PeopleSearch
         public static string GenderNode = @"gender";
         public static string ImageNameNode = @"imagename";
 
+        // For connection string
         public static string ConnectionStringName = @"PersonContext";
         public static string ConnectionString = @"ConnectionString";
         public static string Equal = @"=";
@@ -33,6 +34,8 @@ namespace PeopleSearch
         public static string ForwardSlash = @"\";
         public static string PersonString = @"person";
         public static string ProviderNameAsSqlClient = @"System.Data.SqlClient";
+        public static string RegistryDirectoryPath = @"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL";
+        public static string ReadOnlyString = @"_bReadOnly";
 
 
 

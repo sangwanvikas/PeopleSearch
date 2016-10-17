@@ -6,6 +6,8 @@ using PeopleSearch.ServiceFactory;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 
 namespace PeopleSearch.Tests
@@ -14,15 +16,15 @@ namespace PeopleSearch.Tests
     public class PersonServiceTestMethods
     {
         [TestMethod]
-        public void TestCreateMethod_SavePersonWithOutImage()
+        public void TestCreateMethod_PersonWithoutImage()
         {
             // Arrange
             Person inputPerson = new Person();
-            inputPerson.FirstName = "vikas";
-            inputPerson.LastName = "sangwan";
-            inputPerson.Address = "my address";
-            inputPerson.Gender = "Male";
-            inputPerson.Hobbies = "my hobbies";
+            inputPerson.FirstName = Constants.VikasFirstString;
+            inputPerson.LastName = Constants.SangwanLastName;
+            inputPerson.Address = Constants.AddressString;
+            inputPerson.Gender = Constants.FemaleGenderString;
+            inputPerson.Hobbies = Constants.HobbiesString;
             inputPerson.DateOfBirth = DateTime.Now;
 
             var mockSet = new Mock<DbSet<Person>>();
@@ -40,13 +42,14 @@ namespace PeopleSearch.Tests
         }
 
         [TestMethod]
-        public void TestCreateMethodWithNullObject()
+        public void TestCreateMethod_PersonWithNullObject()
         {
             // Arrange
             Person inputPerson = null;
             var mockSet = new Mock<DbSet<Person>>();
             var mockContext = new Mock<PersonContext>();
             mockContext.Setup(m => m.Persons).Returns(mockSet.Object);
+
             // Act
             var service = new PersonService(mockContext.Object);
             service.Create(inputPerson);
@@ -54,19 +57,18 @@ namespace PeopleSearch.Tests
             // Assert
             mockSet.Verify(m => m.Add(It.IsAny<Person>()), Times.Never());
             mockContext.Verify(m => m.SaveChanges(), Times.Never());
-
         }
 
         [TestMethod]
-        public void TestCreateMethodWithEmptyFields()
+        public void TestCreateMethod_PersonWithEmptyInformation()
         {
             // Arrange
             Person inputPerson = new Person();
-            inputPerson.FirstName = "";
-            inputPerson.LastName = "";
-            inputPerson.Address = "";
-            inputPerson.Gender = "";
-            inputPerson.Hobbies = "";
+            inputPerson.FirstName = string.Empty;
+            inputPerson.LastName = string.Empty;
+            inputPerson.Address = string.Empty;
+            inputPerson.Gender = string.Empty;
+            inputPerson.Hobbies = string.Empty;
             inputPerson.DateOfBirth = DateTime.Now;
             inputPerson.Image = null;
 
@@ -85,41 +87,40 @@ namespace PeopleSearch.Tests
         }
 
         [TestMethod]
-        public void TestCreateMethod()
+        public void TestCreateMethod_CreateFourPersons()
         {
             // Arrange
-
             Person inputPerson1 = new Person();
-            inputPerson1.FirstName = "vikas";
-            inputPerson1.LastName = "sangwan";
-            inputPerson1.Address = "Boston";
-            inputPerson1.Gender = "Male";
-            inputPerson1.Hobbies = "reading books";
+            inputPerson1.FirstName = "Robert";
+            inputPerson1.LastName = "Smith";
+            inputPerson1.Address = Constants.AddressString;
+            inputPerson1.Gender = Constants.FemaleGenderString;
+            inputPerson1.Hobbies = Constants.HobbiesString;
             inputPerson1.DateOfBirth = DateTime.Now;
 
             Person inputPerson2 = new Person();
-            inputPerson2.FirstName = "sam";
-            inputPerson2.LastName = "sangwan";
-            inputPerson2.Address = "Sydney";
-            inputPerson2.Gender = "Female";
-            inputPerson2.Hobbies = "cooking";
+            inputPerson2.FirstName = "Willard";
+            inputPerson2.LastName = "Jolly";
+            inputPerson2.Address = Constants.AddressString;
+            inputPerson2.Gender = Constants.FemaleGenderString;
+            inputPerson2.Hobbies = Constants.HobbiesString;
             inputPerson2.DateOfBirth = DateTime.Now;
 
 
             Person inputPerson3 = new Person();
-            inputPerson3.FirstName = "virat";
-            inputPerson3.LastName = "sangwan";
-            inputPerson3.Address = "Boston";
-            inputPerson3.Gender = "Male";
-            inputPerson3.Hobbies = "playing cricket";
+            inputPerson3.FirstName = "Samantha";
+            inputPerson3.LastName = "B.";
+            inputPerson3.Address = Constants.AddressString;
+            inputPerson3.Gender = Constants.FemaleGenderString;
+            inputPerson3.Hobbies = Constants.HobbiesString;
             inputPerson3.DateOfBirth = DateTime.Now;
 
             Person inputPerson4 = new Person();
-            inputPerson4.FirstName = "Isha";
-            inputPerson4.LastName = "sangwan";
-            inputPerson4.Address = "Sydney";
-            inputPerson4.Gender = "Male";
-            inputPerson4.Hobbies = "playing tennis";
+            inputPerson4.FirstName = "Bob";
+            inputPerson4.LastName = "Marley";
+            inputPerson4.Address = Constants.AddressString;
+            inputPerson4.Gender = Constants.FemaleGenderString;
+            inputPerson4.Hobbies = Constants.HobbiesString;
             inputPerson4.DateOfBirth = DateTime.Now;
 
 
@@ -139,7 +140,6 @@ namespace PeopleSearch.Tests
             // Assert
             mockSet.Verify(m => m.Add(It.IsAny<Person>()), Times.AtLeast(4));
             mockContext.Verify(m => m.SaveChanges(), Times.AtLeast(4));
-
         }
 
         [TestMethod]
@@ -147,9 +147,9 @@ namespace PeopleSearch.Tests
         {
             var data = new List<Person>
             {
-                new Person { FirstName = "Sangwan" ,LastName="Sam" },
-                new Person { FirstName = "Monica",LastName="R" },
-                new Person { FirstName = "Mahil",LastName="S" },
+                new Person { FirstName = "Alice" ,LastName="Wonderland" },
+                new Person { FirstName = "Keeth",LastName="R" },
+                new Person { FirstName = "Steve",LastName="Smith" },
             }.AsQueryable();
 
             var mockSet = new Mock<DbSet<Person>>();
@@ -163,12 +163,12 @@ namespace PeopleSearch.Tests
 
             var service = new PersonService(mockContext.Object);
 
-            List<Person> searchresults = service.Search("a");
+            List<Person> searchresults = service.Search("e");
 
             Assert.AreEqual(3, searchresults.Count());
-            Assert.AreEqual("Sangwan", searchresults[0].FirstName);
-            Assert.AreEqual("Monica", searchresults[1].FirstName);
-            Assert.AreEqual("Mahil", searchresults[2].FirstName);
+            Assert.AreEqual("Alice", searchresults[0].FirstName);
+            Assert.AreEqual("Keeth", searchresults[1].FirstName);
+            Assert.AreEqual("Steve", searchresults[2].FirstName);
         }
 
         [TestMethod]
@@ -193,7 +193,6 @@ namespace PeopleSearch.Tests
 
             // Assert
             Assert.AreEqual(null, searchresults);
-
         }
 
         [TestMethod]
@@ -218,7 +217,6 @@ namespace PeopleSearch.Tests
 
             // Assert
             Assert.AreEqual(null, searchresults);
-
         }
 
         [TestMethod]
@@ -246,35 +244,36 @@ namespace PeopleSearch.Tests
 
         }
 
-        //[TestMethod]
-        //public void TestCreateMethod_PersonService_SavePersonWithImage()
-        //{
-        //    // Arrange
-        //    Person inputPerson = new Person();
-        //    inputPerson.FirstName = "vikas";
-        //    inputPerson.LastName = "sangwan";
-        //    inputPerson.Address = "my address";
-        //    inputPerson.Gender = "Male";
-        //    inputPerson.Hobbies = "my hobbies";
-        //    inputPerson.DateOfBirth = DateTime.Now;
+        [TestMethod]
+        public void TestCreateMethod_PersonWithImage()
+        {
+            // Arrange
+            Person inputPerson = new Person();
+            inputPerson.FirstName = Constants.VikasFirstString;
+            inputPerson.LastName = Constants.SangwanLastName;
+            inputPerson.Address = Constants.AddressString;
+            inputPerson.Gender = Constants.FemaleGenderString;
+            inputPerson.Hobbies = Constants.HobbiesString;
+            inputPerson.DateOfBirth = DateTime.Now;
 
-        //    Image img = System.Drawing.Image.FromFile("../../Resources/Images/Albert_Einstein.jpg");
-        //    MemoryStream ms = new MemoryStream();
-        //    img.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-        //    inputPerson.Image = ms.ToArray();
 
-        //    var mockSet = new Mock<DbSet<Person>>();
-        //    var mockContext = new Mock<PersonContext>();
-        //    mockContext.Setup(m => m.Persons).Returns(mockSet.Object);
+            Image img = System.Drawing.Image.FromFile("../../Resources/Images/Albert_Einstein.jpg");
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            inputPerson.Image = ms.ToArray();
 
-        //    // Act
-        //    var service = new PersonService(mockContext.Object);
-        //    service.Create(inputPerson);
+            var mockSet = new Mock<DbSet<Person>>();
+            var mockContext = new Mock<PersonContext>();
+            mockContext.Setup(m => m.Persons).Returns(mockSet.Object);
 
-        //    // Assert
-        //    mockSet.Verify(m => m.Add(It.IsAny<Person>()), Times.Once());
-        //    mockContext.Verify(m => m.SaveChanges(), Times.Once());
+            // Act
+            var service = new PersonService(mockContext.Object);
+            service.Create(inputPerson);
 
-        //}
+            // Assert
+            mockSet.Verify(m => m.Add(It.IsAny<Person>()), Times.Once());
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+
+        }
     }
 }

@@ -34,20 +34,22 @@ namespace PeopleSearch.Helper
             return conStringVM;
         }
 
+        // Get local machine name as the servername what SqlServer instance is running on.
         public static string GetServerName()
         {
             string myServer = Environment.MachineName;
             return myServer;
-
         }
 
+        // Find all sql server instances of local machine.
+        // TODO: It fails if 32 bit is installed on 64-bit machine
         public static List<string> GetSqlInstanceNames()
         {
             RegistryView registryView = Environment.Is64BitOperatingSystem ? RegistryView.Registry64 : RegistryView.Registry32;
 
             using (RegistryKey baseKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, registryView))
             {
-                RegistryKey key = baseKey.OpenSubKey(@"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL");
+                RegistryKey key = baseKey.OpenSubKey(Constants.RegistryDirectoryPath);
                 foreach (string s in key.GetValueNames())
                 {
 
@@ -57,20 +59,20 @@ namespace PeopleSearch.Helper
             }
         }
 
+        // Updates connectionstring value only in memory. Changes are not persisted in file.
+        // Application stopped, changed in web-config are gone!
         public static void UpdateConnectionStringInWebConfig(ConnectionString conStringObj)
         {
             string finalConnectionString = conStringObj.ToString();
             string provider = conStringObj.ProviderName;
 
             var settings = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName];
-            var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+            var fi = typeof(ConfigurationElement).GetField(Constants.ReadOnlyString, BindingFlags.Instance | BindingFlags.NonPublic);
             fi.SetValue(settings, false);
 
             settings.ConnectionString = finalConnectionString;
             settings.ProviderName = conStringObj.ProviderName;
         }
-
-
 
     }
 }

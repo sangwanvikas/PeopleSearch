@@ -8,8 +8,7 @@ namespace PeopleSearch.Helper
 {
     public static class ImageHelper
     {
-
-        public static byte[] GetImageBytes(Stream stream)
+        public static byte[] ConvertStramToByeArray(Stream stream)
         {
             byte[] data;
             using (Stream inputStream = stream)
@@ -25,14 +24,13 @@ namespace PeopleSearch.Helper
             }
         }
 
-        public static Stream GetAttachmentStream(HttpFileCollectionBase attachments)
+        public static Stream GetAttachmentStramFromHttpFiles(HttpFileCollectionBase attachments)
         {
             foreach (string file in attachments)
             {
                 var fileContent = attachments[file];
                 if (fileContent != null && fileContent.ContentLength > 0)
                 {
-                    // get a stream
                     return fileContent.InputStream;
                 }
             }

@@ -98,8 +98,8 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
         [HttpPost]
         public ActionResult UploadImage()
         {
-            Stream stream = ImageHelper.GetAttachmentStream(Request.Files);
-            _imageBytes = ImageHelper.GetImageBytes(stream);
+            Stream stream = ImageHelper.GetAttachmentStramFromHttpFiles(Request.Files);
+            _imageBytes = ImageHelper.ConvertStramToByeArray(stream);
 
             return Json("File uploaded successfully");
         }
