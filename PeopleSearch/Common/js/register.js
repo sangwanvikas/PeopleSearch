@@ -73,17 +73,25 @@ function RegisterPerson() {
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                 console.log("Person saved successfully");
-                $('#successMessage').show();
+               
+                $('#successMessage').html('Success! Person registered sucessfully.');
+                $('#successMessage').attr('class', 'alert alert-success');
             },
             error: function (err) {
                 console.log("Error occured while saving a person's record");
-                $('#errorMessage').hide();
+                $('#errorMessage').html('Failure! Unexpected error occured while saving a record.');
+                $('#errorMessage').attr('class', 'alert alert-warning')
             }
         });
     } else {
-        $('#validationMessage').show();
-        $('#successMessage').hide();
-        $('#errorMessage').hide();
+        $('#validationMessage').html('First name and birthday can not be left empty. Birthday must not exceed today\'s date.');
+        $('#validationMessage').attr('class', 'alert alert-warning  col-sm-off-4 col-sm-8');
+        
+        $('#successMessage').html('');
+        $('#successMessage').attr('class', '')
+
+        $('#errorMessage').html('');
+        $('#errorMessage').attr('class', '')
     }
 
 }
@@ -95,7 +103,16 @@ function isPersonValid() {
 }
 
 function HideWarnings() {
-    $('#validationMessage').hide();
-    $('#successMessage').hide();
-    $('#errorMessage').hide();
+    $('#validationMessage').html('');
+    $('#validationMessage').attr('class', ' col-sm-off-4 col-sm-8')
+
+    $('#successMessage').html('');
+    $('#successMessage').attr('class', '')
+    
+    $('#errorMessage').html('');
+    $('#errorMessage').attr('class', '')
+
+    //$('#validationMessage').hide();
+    //$('#successMessage').hide();
+    //$('#errorMessage').hide();
 }
