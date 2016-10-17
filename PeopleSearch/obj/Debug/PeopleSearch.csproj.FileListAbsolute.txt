@@ -70,3 +70,4 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.pdb
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\obj\Debug\PeopleSearch.csprojResolveAssemblyReference.cache

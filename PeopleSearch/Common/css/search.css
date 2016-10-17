@@ -2,6 +2,14 @@
     /*background-color:skyblue;*/
 }
 
+.zeroRecordMsg{
+    font-family:Arial;
+    font:xx-large;
+    margin-left:20px;
+    color:orange;
+      
+}
+
 .page-header{
     color:black;
 }

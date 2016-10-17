@@ -1,9 +1,9 @@
 ﻿
 function SearchPerson(e) {
-
+    $('#blankValidationMsg').html('');
     var name = { 'name': $('#searchTextBox').val(), 'isExactMatchRequested': false };
 
-    if ($.trim(name).length > 0) {
+    if ($('#searchTextBox').val().trim().length > 0) {
         showProgress();
         $.ajax({
             url: "/Person/Result",
@@ -20,7 +20,9 @@ function SearchPerson(e) {
 
         });
     } else {
-
+        console.log("hi")
+        $('#blankValidationMsg').html('Can not be left empty!');
+        console.log($('#blankValidationMsg').text());
     }
    
 };

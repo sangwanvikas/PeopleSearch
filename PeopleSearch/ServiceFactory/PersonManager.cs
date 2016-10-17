@@ -96,7 +96,8 @@ namespace PeopleSearch.ServiceFactory
                 personViewModel.DateOfBirth = person.DateOfBirth;
                 personViewModel.Hobbies = person.Hobbies;
                 personViewModel.Gender = person.Gender;
-                personViewModel.Age = (float)(DateTime.Now.Month - person.DateOfBirth.Month) / 12;
+                double diff = DateTime.Now.Subtract(person.DateOfBirth).Days / (365.25 / 12);
+                personViewModel.Age = (float)Math.Round(diff / 12, 2);
 
                 if (person.Image != null)
                 {
