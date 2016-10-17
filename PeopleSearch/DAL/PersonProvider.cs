@@ -20,6 +20,7 @@ namespace PeopleSearch.DAL
             _db = db;
         }
 
+        // SAVE a person in DB
         public int Create(Person person)
         {
             _db.Persons.Add(person);
@@ -28,13 +29,9 @@ namespace PeopleSearch.DAL
             return person.Id;
         }
 
-
+        // Get list of persons by given name.
         public List<Person> SearchByName(string name)
         {
-            //person.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
-            //             || person.LastName.ToLower().Contains(name.ToLower().Trim())
-            //              select person;
-
             List<Person> persons = _db.Persons
                                     .Where(p => p.FirstName.ToLower().Trim().Contains(name.ToLower().Trim())
                                         || p.LastName.ToLower().Trim().Contains(name.ToLower().Trim()))
@@ -43,6 +40,7 @@ namespace PeopleSearch.DAL
             return persons.ToList();
         }
 
+        // Get number of records in database.
         public int RecordsCount()
         {
             int count = _db.Persons

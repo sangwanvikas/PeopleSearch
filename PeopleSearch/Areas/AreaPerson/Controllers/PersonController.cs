@@ -17,9 +17,13 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
 {
     public class PersonController : Controller
     {
-        public static byte[] imageBytes;
-
+        public static byte[] _imageBytes;
         PersonManager _personManager;
+
+        public PersonController()
+        {
+            _personManager = new PersonManager();
+        }
 
         public ActionResult Index()
         {
@@ -42,52 +46,30 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
         [HttpGet]
         public ActionResult ConfigurationResult(ConnectionString conStringObj)
         {
+            // updated "PersonContext" connectionString in web config only for this 
+            // execution.
+            ConnectionStringHelper.UpdateConnectionStringInWebConfig(conStringObj);
 
-            string finalConnectionString = conStringObj.ToString();
-            string provider = conStringObj.ProviderName;
-
-            var settings = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName];
-            var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
-            fi.SetValue(settings, false);
-
-            settings.ConnectionString = finalConnectionString;
-            settings.ProviderName = conStringObj.ProviderName;
-
+            // Check validity of the connection string. If turns out valid then save seed data in Database.
+            // Seed data don't get saved over if you are running this application with a connectionstring,
+            // which you have already used to run this application before.
             _personManager = new PersonManager();
             string successOrErrorMsg = _personManager.SaveSeedData();
             conStringObj.Message = successOrErrorMsg;
 
             return View(conStringObj);
-
-            //if (true)
-            //{
-            //    conString.Status = "SUCCESS";
-            //    conString.Message = "Valid connection string. On the top right corenr of the page, click on Register link to add new person or click on Search link to find persons from seed data.";
-            //    return View(conString);
-            //}
-            //else
-            //{
-            //    conString.Status = "ERROR";
-            //    conString.Message = "Not a valid connection string. Please go back to configuration page and try with new connection string";
-            //    return View(conString);
-            //}  
         }
         #endregion
-
 
         #region Navigation buttons
         public ActionResult Register()
         {
             return View("Register");
-          //  return View(new Person());
-
         }
 
         public ActionResult Search()
         {
             return View("Search");
-            //IEnumerable<Person> persons = new List<Person>();
-            //return View(persons);
         }
 
         #endregion
@@ -97,7 +79,6 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
         [HttpGet]
         public ActionResult Result(string name)
         {
-            _personManager = new PersonManager();
             List<PersonViewModel> resultPersons = _personManager.Search(name);
 
             return View(resultPersons);
@@ -109,8 +90,7 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
         [HttpPost]
         public ActionResult Create(PersonViewModel personViewModel)
         {
-            _personManager = new PersonManager();
-            int id = _personManager.Create(personViewModel, imageBytes);
+            int id = _personManager.Create(personViewModel, _imageBytes);
 
             return Json(new Person());
         }
@@ -119,7 +99,7 @@ namespace PeopleSearch.Areas.AreaPerson.Controllers
         public ActionResult UploadImage()
         {
             Stream stream = ImageHelper.GetAttachmentStream(Request.Files);
-            imageBytes = ImageHelper.GetImageBytes(stream);
+            _imageBytes = ImageHelper.GetImageBytes(stream);
 
             return Json("File uploaded successfully");
         }

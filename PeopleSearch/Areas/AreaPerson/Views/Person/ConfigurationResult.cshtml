@@ -2,13 +2,20 @@
 
 @if (@Model.Message.Contains("Connection established successfully"))
 {
-    <div class="col-lg-offset-2 col-sm-6 form-control-static ">
+    <div class="col-lg-offset-2 col-sm-10 form-control-static ">
 
         <div class="alert-success">
-            @Html.Label(@Model.Message)
-        </div>
-        <div class="">
-            @Html.Label(@Model.FinalConfigurationString)
+            <label>
+                Connection String Validated Successfully.
+                @Html.Label(@Model.Message)
+            </label>
+
+            <div class="">
+                <label>
+                    Final Connection string:
+                    @Html.Label(@Model.FinalConfigurationString)
+                </label>
+            </div>
         </div>
     </div>
 
@@ -18,11 +25,15 @@
 {
     <div class="col-lg-offset-2 form-control-static ">
         <div class="alert-danger">
-            <label> Error Occured while loading seed data. Please re-launch application and provide new connectionstring configurations</label>
+            <label> Incorrect connection string. Please provide new connectionstring, and try again.</label>
             @Html.Label(@Model.Message)
-        </div>
-        <div class="">
-            @Html.Label(@Model.FinalConfigurationString)
+
+            <div class="">
+                <label>
+                    Your connection ctring was:
+                    @Html.Label(@Model.FinalConfigurationString)
+                </label>
+            </div>
         </div>
     </div>
 

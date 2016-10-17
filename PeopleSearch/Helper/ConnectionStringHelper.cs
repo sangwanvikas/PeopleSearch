@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using PeopleSearch.Models;
+using PeopleSearch.Areas.AreaPerson.Models;
 using PeopleSearch.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -57,7 +57,20 @@ namespace PeopleSearch.Helper
             }
         }
 
+        public static void UpdateConnectionStringInWebConfig(ConnectionString conStringObj)
+        {
+            string finalConnectionString = conStringObj.ToString();
+            string provider = conStringObj.ProviderName;
 
-      
+            var settings = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName];
+            var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+            fi.SetValue(settings, false);
+
+            settings.ConnectionString = finalConnectionString;
+            settings.ProviderName = conStringObj.ProviderName;
+        }
+
+
+
     }
 }

@@ -18,12 +18,14 @@ namespace PeopleSearch.ServiceFactory
             _db = new PersonContext();
             _personService = new PersonService(_db);
         }
-
+        
+        // SAVE person information in DB
         public int Create(PersonViewModel personViewModel, byte[] imageBytes)
         {
             try
             {
                 Person person = GetPerson(personViewModel, imageBytes);
+
                 return _personService.Create(person);
             }
             catch (Exception ex)
@@ -54,13 +56,13 @@ namespace PeopleSearch.ServiceFactory
                     return person;
                 }
             }
-
             catch (Exception ex)
             {
                 throw ex;
             }
         }
 
+        // Find list of persons by given name.
         public List<PersonViewModel> Search(string name)
         {
             if (!string.IsNullOrEmpty(name))
@@ -81,8 +83,7 @@ namespace PeopleSearch.ServiceFactory
 
             return new List<PersonViewModel>();
         }
-
-
+        
         public static List<PersonViewModel> PopulatePersonViewModelList(List<Person> persons)
         {
             List<PersonViewModel> personViewModelList = new List<PersonViewModel>();
@@ -101,6 +102,7 @@ namespace PeopleSearch.ServiceFactory
 
                 if (person.Image != null)
                 {
+                    // Convert byte[] to image
                     var base64 = Convert.ToBase64String(person.Image);
                     string imgSrc = String.Format("data:image/jpeg;base64,{0}", base64);
 
@@ -112,17 +114,15 @@ namespace PeopleSearch.ServiceFactory
 
             return personViewModelList;
         }
-
-
-
-
+        
+        // Save 8 records of Seed data in database for valid connection string.
         public string SaveSeedData()
         {
             try
             {
                 int recordsCount = _personService.RecordsCount();
 
-                return "Success ! Connection established successfully. Number of person records in database :  " + recordsCount.ToString() + ".";
+                return "Success!! Connection established successfully. Number of person records in database :  " + recordsCount.ToString() + ".";
             }
             catch (Exception ex)
             {
