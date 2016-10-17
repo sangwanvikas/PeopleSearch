@@ -39,23 +39,25 @@ namespace PeopleSearch.Controllers
         }
 
         #region ConnectionString
-        public ActionResult ConfigurationResult(ConnectionString conString)
+        [HttpGet]
+        public ActionResult ConfigurationResult(ConnectionString conStringObj)
         {
 
-            string finalConnectionString = conString.ToString();
-            string provider = conString.ProviderName;
+            string finalConnectionString = conStringObj.ToString();
+            string provider = conStringObj.ProviderName;
 
             var settings = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName];
             var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
             fi.SetValue(settings, false);
 
             settings.ConnectionString = finalConnectionString;
-            settings.ProviderName = conString.ProviderName;
+            settings.ProviderName = conStringObj.ProviderName;
 
             _personManager = new PersonManager();
             string successOrErrorMsg = _personManager.SaveSeedData();
-            conString.Message = successOrErrorMsg;
-            return View(conString);
+            conStringObj.Message = successOrErrorMsg;
+
+            return View(conStringObj);
 
             //if (true)
             //{
@@ -68,9 +70,7 @@ namespace PeopleSearch.Controllers
             //    conString.Status = "ERROR";
             //    conString.Message = "Not a valid connection string. Please go back to configuration page and try with new connection string";
             //    return View(conString);
-            //}
-            return View(conString);
-
+            //}  
         }
         #endregion
 

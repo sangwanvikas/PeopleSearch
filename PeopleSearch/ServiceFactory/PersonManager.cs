@@ -120,7 +120,7 @@ namespace PeopleSearch.ServiceFactory
             catch (Exception ex)
             {
 
-                return ex.Message;
+                return String.Format("{0}{1}","Error Occured while loading seed data. Please try again with correct connectionstring configurations",ex.Message);
             }
         }
     }

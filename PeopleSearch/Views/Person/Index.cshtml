@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("ConfigurationResult", "Person", FormMethod.Post))
+@using (Html.BeginForm(""))
 {
     @*// "connectionString=Data Source=LENOVO-PC\SQLEXPRESS;Database=person;Integrated Security=True"*@
     <div class="page-header"><h1>Configure ConnectionString</h1></div>
@@ -28,7 +28,7 @@
                 @Html.Label(@"Provider name:", new { @class = "" })
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.ProviderName, new { @class = "providerName input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.ProviderName, new {  @class = "providerName input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.ProviderName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
                 @Html.Label(@"Sql Server name:", new { @class = "" })
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.ServerNameValue, new { maxlength = "255", placeholder = "Enter SqlServer name", @class = "input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.ServerNameValue, new { @id = "ServerNameValue", maxlength = "255", placeholder = "Enter SqlServer name", @class = "input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.ServerNameValue, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -52,7 +52,7 @@
                 <label for="formGroupExampleInput">Custom value:</label>
                 @Html.CheckBoxFor(Model => Model.isCustomInstance, new { id = "isCustomInstance", @selected = "false" })
 
-                @Html.TextBoxFor(model => model.SqlServerInstanceValue, new { @id = "instanceValue", @disabled = "true", maxlength = "255", placeholder = "Enter instance name", @class = "input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.SqlServerInstanceValue, new { @id = "SqlServerInstanceValue", @disabled = "true", maxlength = "255", placeholder = "Enter instance name", @class = "input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.SqlServerInstanceValue, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
                 @Html.Label("Database name:")
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.DatabaseValue, new { maxlength = "255", placeholder = "Database name", @class = "input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.DatabaseValue, new { @id = "DatabaseValue", maxlength = "255", placeholder = "Database name", @class = "input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.DatabaseValue, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -72,20 +72,24 @@
                 @Html.Label("Integrated Security:")
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.IntegratedSecurityValue, new { @id = "integratedSecurityValue", disabled = true, maxlength = "255", placeholder = "Integrated Security", @class = "input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.IntegratedSecurityValue, new { @id = "IntegratedSecurityValue", disabled = true, maxlength = "255", placeholder = "Integrated Security", @class = "input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.IntegratedSecurityValue, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
-        <button type="submit" id="btnSubmit">Configure</button>
+        <button type="submit" id="btnSubmit1">Configure</button>
 
-
+        <div id="ConfigurationResultDiv1"></div>
     </div>
 
 }
+<div id="spinner">
+    Loading...
+</div>
+
 <hr />
-@using (Html.BeginForm("ConfigurationResult", "Person", FormMethod.Post))
+@using (Html.BeginForm())
 {
     <div class="container">
         <div class="form-group">
@@ -110,7 +114,7 @@
                 @Html.Label(@"Provider name:", new { @class = "" })
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.ProviderName, new { @class = "providerName input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.ProviderName, new {@id= "ProviderName2", @class = "providerName input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.ProviderName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,15 +130,19 @@
                        placeholder = @"Data Source=SERVER_NAME\SQL_INSTANCE_NAME;Database=DATABASE_NAME;Integrated Security=True_OR_FALSE (username and pwd also allowed)",
                        @class = " form-control input-xlarge-fluid"
                    })
-                <button type="submit" id="btnSubmit">Configure</button>
+                <button type="submit" id="btnSubmit2">Configure</button>
                 @Html.ValidationMessageFor(model => model.FinalConfigurationString, "", new { @class = "text-danger" })
+               
             </div>
         </div>
+        <div id="ConfigurationResultDiv2"></div>
 
 
 
     </div>
 }
+
+
 
 @*@Html.Rend("ConfigurationResult", new PeopleSearch.Models.ConnectionString())*@
 
@@ -146,28 +154,153 @@
     $("#isCustomInstance").change(function () {
         console.log(this.checked)
         if (this.checked) {
-            $('#instanceValue').attr("disabled", false);
+            $('#SqlServerInstanceValue').attr("disabled", false);
         } else {
-            $('#instanceValue').attr("disabled", true);
+            $('#SqlServerInstanceValue').attr("disabled", true);
         }
     });
 
     $("#dropDown").change(function () {
         console.log($('#dropDown option:selected').val());
 
-        $('#instanceValue').val($('#dropDown option:selected').val());
+        $('#SqlServerInstanceValue').val($('#dropDown option:selected').val());
     });
 
     //$(".container").children().on('change', function () {
     //    $('#finalConnectionString').html("hello");
     //});
     $('#btnSubmit').click(function () {
-        $('#instanceValue').attr("disabled", false);
-        $('#integratedSecurityValue').attr("disabled", false);
+        $('#SqlServerInstanceValue').attr("disabled", false);
+        $('#IntegratedSecurityValue').attr("disabled", false);
         $('.name').attr('disabled', false);
         $('.providerName').attr('disabled', false);
 
     })
 
+
+
+
+
+    $('#btnSubmit1').on("click", function (event) {
+        showProgress();
+        $('#ConfigurationResultDiv1').html('');
+        $('#ConfigurationResultDiv2').html('');
+        var form = $(this);
+        
+        var conString = {
+            'Name': $('.name').val(),
+            'ServerNameValue': $('#ServerNameValue').val(),
+            'SqlServerInstanceValue': $('#SqlServerInstanceValue').val(),
+            'DatabaseValue': $('#DatabaseValue').val(),
+            'IntegratedSecurityValue': $('#IntegratedSecurityValue').val(),
+            'FinalConfigurationString': $('#FinalConfigurationString').val(),
+            'Status': $('#Status').val(),
+            'Message': $('#Message').val(),
+            'ProviderName': $('#ProviderName').val(),
+        }
+
+        if (form.valid()) {
+            $.ajax({
+                url: "/Person/ConfigurationResult",
+                type: "GET",
+                data: name,
+                data: conString,
+                success: function (msg) {
+                    hideProgress();
+                    $('#ConfigurationResultDiv1').html(msg);
+                   
+                    console.log(msg);
+                },
+                error: function (err) {
+                    hideProgress();
+                    console.log("Error occured while setting connection string.");
+                    $('#ConfigurationResultDiv1').html(err)
+                   
+                }
+            });
+        }
+
+        event.preventDefault();
+    });
+
+    $('#btnSubmit2').on("click", function (event) {
+        showProgress();
+        $('#ConfigurationResultDiv1').html('');
+        $('#ConfigurationResultDiv2').html('');
+        var form = $(this);
+        var conString = {
+            'Name': $('.name').val(),
+            'ServerNameValue': '',
+            'SqlServerInstanceValue': '',
+            'DatabaseValue': '',
+            'IntegratedSecurityValue': '',
+            'FinalConfigurationString': $('#FinalConfigurationString').val(),
+            'Status': '',
+            'Message': '',
+            'ProviderName': $('#ProviderName2').val(),
+        }
+
+        if (form.valid()) {
+            $.ajax({
+                url: "/Person/ConfigurationResult",
+                type: "GET",
+                data: conString,
+                success: function (msg) {
+                    hideProgress();
+                    $('#ConfigurationResultDiv2').html(msg);                   
+                    console.log(msg);
+                },
+                error: function (err) {
+                    hideProgress();
+                    $('#ConfigurationResultDiv2').html(err);
+                    console.log("Error occured while setting connection string.");
+                }
+            });
+        }
+
+        event.preventDefault();
+    });
+    // code for loader
+
+    var spinnerVisible = false;
+
+    function showProgress() {
+        if (!spinnerVisible) {
+            $("div#spinner").fadeIn("fast");
+            spinnerVisible = true;
+        }
+    };
+
+    function hideProgress() {
+        if (spinnerVisible) {
+            var spinner = $("div#spinner");
+            spinner.stop();
+            spinner.fadeOut("fast");
+            spinnerVisible = false;
+        }
+    };
+
+
 </script>
+<style>
+    div#spinner {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: url('../../Resources/Images/spinner.gif') no-repeat center rgba(50,50,50,0.5);
+    background-size: 100px;
+    text-align: center;
+    font: normal 16px Tahoma, Geneva, sans-serif;
+    border: 1px solid #666;
+    z-index: 2;
+    overflow: auto;
+    /*background: rgba(50,50,50,0.5);*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
 
