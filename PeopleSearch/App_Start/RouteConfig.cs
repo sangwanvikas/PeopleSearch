@@ -16,8 +16,10 @@ namespace PeopleSearch
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional }
-            );
+              defaults: new { controller = "Person", action = "Index", id = UrlParameter.Optional })
+              .DataTokens = new RouteValueDictionary(new { area = "AreaPerson" });
+
+
         }
     }
 }

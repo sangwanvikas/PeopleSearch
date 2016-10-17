@@ -175,8 +175,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\AreaPerson\AreaPersonAreaRegistration.cs" />
+    <Compile Include="Areas\AreaPerson\Controllers\PersonController.cs" />
+    <Compile Include="Areas\AreaPerson\Models\ConnectionString.cs" />
+    <Compile Include="Areas\AreaPerson\Models\Person.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="DAL\PersonContext.cs" />
     <Compile Include="DAL\PersonDBInitializer.cs" />
     <Compile Include="DAL\PersonProvider.cs" />
@@ -222,6 +225,12 @@
     <Content Include="Resources\Images\spinner.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\AreaPerson\Views\web.config" />
+    <Content Include="Areas\AreaPerson\Views\Person\Index.cshtml" />
+    <Content Include="Areas\AreaPerson\Views\Person\Register.cshtml" />
+    <Content Include="Areas\AreaPerson\Views\Person\Search.cshtml" />
+    <Content Include="Areas\AreaPerson\Views\Person\Result.cshtml" />
+    <Content Include="Areas\AreaPerson\Views\Person\ConfigurationResult.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -245,15 +254,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Person\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Person\Search.cshtml" />
-    <Content Include="Views\Person\Register.cshtml" />
-    <Content Include="Views\Person\Result.cshtml" />
-    <Content Include="Views\Person\ConfigurationResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

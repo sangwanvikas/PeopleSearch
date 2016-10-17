@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
-using PeopleSearch.Models;
 using System.IO;
 using PeopleSearch.ViewModels;
 using PeopleSearch.ServiceFactory;
@@ -12,8 +11,9 @@ using System.Web.Configuration;
 using System.Configuration;
 using System.Data.Common;
 using System.Reflection;
+using PeopleSearch.Areas.AreaPerson.Models;
 
-namespace PeopleSearch.Controllers
+namespace PeopleSearch.Areas.AreaPerson.Controllers
 {
     public class PersonController : Controller
     {
@@ -78,13 +78,16 @@ namespace PeopleSearch.Controllers
         #region Navigation buttons
         public ActionResult Register()
         {
-            return View(new Person());
+            return View("Register");
+          //  return View(new Person());
+
         }
 
         public ActionResult Search()
         {
-            IEnumerable<Person> persons = new List<Person>();
-            return View(persons);
+            return View("Search");
+            //IEnumerable<Person> persons = new List<Person>();
+            //return View(persons);
         }
 
         #endregion
@@ -122,6 +125,5 @@ namespace PeopleSearch.Controllers
         }
 
         #endregion
-
     }
 }

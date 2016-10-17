@@ -8,7 +8,7 @@ using PeopleSearch.ServiceFactory;
 using PeopleSearch.DAL;
 using System.Data.Entity;
 using Moq;
-using PeopleSearch.Controllers;
+using PeopleSearch.Areas.AreaPerson.Controllers;
 
 namespace PeopleSearch.Tests.Controllers
 {
