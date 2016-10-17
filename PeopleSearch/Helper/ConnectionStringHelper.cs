@@ -52,10 +52,8 @@ namespace PeopleSearch.Helper
                 {
 
                 }
-                var resu = key.GetValueNames().ToList();
-                resu.Add("game");
-                resu.Add("game");
-                return resu;
+                var result = key.GetValueNames().ToList();
+                return result;
             }
         }
 
