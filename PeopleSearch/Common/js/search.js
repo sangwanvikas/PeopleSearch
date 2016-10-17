@@ -1,21 +1,27 @@
 ﻿
 function SearchPerson(e) {
-    var name = { 'name': $('#searchTextBox').val(), 'isExactMatchRequested': false };
-    showProgress();
-    $.ajax({
-        url: "/Person/Result",
-        type: "GET",
-        data: name,
-        success: function (msg) {
-            hideProgress();
-            $('#peopleDetails').html(msg);            
-        },
-        error: function (f) {
-            console.log(f);
-            hideProgress();
-        }
 
-    });
+    var name = { 'name': $('#searchTextBox').val(), 'isExactMatchRequested': false };
+
+    if ($.trim(name).length > 0) {
+        showProgress();
+        $.ajax({
+            url: "/Person/Result",
+            type: "GET",
+            data: name,
+            success: function (msg) {
+                hideProgress();
+                $('#peopleDetails').html(msg);
+            },
+            error: function (f) {
+                console.log(f);
+                hideProgress();
+            }
+
+        });
+    } else {
+
+    }
    
 };
 

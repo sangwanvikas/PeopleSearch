@@ -42,7 +42,9 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.WebPages.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.WebPages.Razor.dll
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\WebGrease.dll
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.MoqHelper.xml
+C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.SqlServer.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Moq.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.Helpers.xml
@@ -54,8 +56,6 @@ C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\b
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\System.Web.WebPages.Razor.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Antlr3.Runtime.pdb
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Newtonsoft.Json.xml
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.xml
-C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\EntityFramework.SqlServer.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.AspNet.Identity.Core.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\vikas\Documents\Visual Studio 2013\Projects\PeopleSearch\PeopleSearch\bin\Microsoft.AspNet.Identity.EntityFramework.xml

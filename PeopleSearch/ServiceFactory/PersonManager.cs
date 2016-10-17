@@ -63,19 +63,25 @@ namespace PeopleSearch.ServiceFactory
 
         public List<PersonViewModel> Search(string name)
         {
-            try
+            if (!string.IsNullOrEmpty(name))
             {
-                List<Person> persons = _personService.Search(name);
-                List<PersonViewModel> personViewModelList = PopulatePersonViewModelList(persons);
+                try
+                {
+                    List<Person> persons = _personService.Search(name);
+                    List<PersonViewModel> personViewModelList = PopulatePersonViewModelList(persons);
 
-                return personViewModelList;
-            }
-            catch (Exception)
-            {
+                    return personViewModelList;
+                }
+                catch (Exception)
+                {
 
-                throw;
+                    throw;
+                }
             }
+
+            return new List<PersonViewModel>();
         }
+
 
         public static List<PersonViewModel> PopulatePersonViewModelList(List<Person> persons)
         {
@@ -113,14 +119,14 @@ namespace PeopleSearch.ServiceFactory
         {
             try
             {
-               int recordsCount = _personService.RecordsCount();
+                int recordsCount = _personService.RecordsCount();
 
                 return "Connection established successfully. Seed data [" + recordsCount.ToString() + "] records saved in database!";
             }
             catch (Exception ex)
             {
 
-                return String.Format("{0}{1}","Error Occured while loading seed data. Please try again with correct connectionstring configurations",ex.Message);
+                return String.Format("{0}{1}", "Error Occured while loading seed data. Please try again with correct connectionstring configurations", ex.Message);
             }
         }
     }
