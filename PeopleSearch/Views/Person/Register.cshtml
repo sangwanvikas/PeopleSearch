@@ -6,14 +6,14 @@
 }
 
 
-<div class="container registration-container-div">
+<div class="container form-horizontal registration-container-div">
     <div class="page-header"><h1>Register</h1></div>
     <div class="row col-sm-10 ">
 
-      
 
-        <div class="form-inline">
-            <div class="form-group col-sm-6">
+
+        <div class="form-group">
+            <div class=" col-sm-6">
                 <input type="text" id="firstName" class="textBox form-control " placeholder="First name" />
                 @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
             </div>
@@ -23,57 +23,59 @@
             </div>
         </div>
 
-        <div class="form-inline">
-            <div class="form-group col-sm-12 top-buffer">
+        <div class="form-group">
+            <div class=" col-sm-12 ">
                 <input type="text" id="address" class="textBox form-control" placeholder="Address" />
             </div>
         </div>
 
-        <div class="form-inline">
-            <div class="form-group col-sm-12 top-buffer">
+        <div class="form-group">
+            <div class="col-sm-12 ">
                 <textarea id="hobbies" class="textBox form-control" placeholder="Hobbies"></textarea>
             </div>
         </div>
 
-        <div class="form-inline">
-            <div class="form-group col-sm-12 top-buffer">
-                <label for="formGroupExampleInput">Male:</label>    @Html.RadioButton("Gender", "Male", new { id = "gender" , @checked="ture"})
+        <div class="form-group">
+            <div class="col-sm-12 ">
+                <label for="formGroupExampleInput">Male:</label>    @Html.RadioButton("Gender", "Male", new { id = "gender", @checked = "ture" })
                 <label for="formGroupExampleInput">Female:</label>  @Html.RadioButton("Gender", "Female", new { id = "gender" })
             </div>
         </div>
 
-        <div class="form-inline">
-            <div class="form-group col-sm-6 top-buffer">
+        <div class="form-group">
+            <div class=" col-sm-4 ">
                 <label for="formGroupExampleInput">Birthday</label>
                 <input type="date" id="dob" class="textBox form-control" placeholder="Enter dob" />
             </div>
         </div>
 
-        <div class="form-inline">
-            <div class="form-group col-sm-12 top-buffer">
-                <label for="formGroupExampleInput">Image</label>
+        <div class="form-group">
+            <div class=" col-sm-12  ">
+                <label for="control-label">Image</label>
                 <input type="file" id="attachment" onchange="ChangeAttachment(event)" class="file  input-files cols-sm-9" />
             </div>
         </div>
 
 
-        <div class="form-inline">
-            <div class="form-group col-sm-12 top-buffer ">
-                <button id="registerBtn" onclick="RegisterPerson()" class=" btn-danger">Register</button>
+        <div class="form-group">
+            <div class="col-sm-4  ">
+                <button id="registerBtn" onclick="RegisterPerson()" class="btn btn-success btn-block">Register</button>
             </div>
-
-            <div class="text-danger" id="validationMessage" ><p>First name and birthday (less than current date & time) can't be left blank.</p></div>
-
-            <div class="alert alert-success" id="successMessage">
-                <strong>Success! Person registered sucessfully.</strong>
+            <div class="alert alert-warning col-sm-off-4 col-sm-8" id="validationMessage">
+                <p>First name and birthday can't be left empty. Birthday must not exceed today's date.</p>
             </div>
+        </div>
 
-            <div class="alert alert-warning" id="errorMessage">
-                <strong>Failure! Unexpected error occured while saving a record.</strong>
+        <div class="container top-buffer">
+            <div class="form-group ">
+                <div class="alert alert-success" id="successMessage">
+                    <strong>Success! Person registered sucessfully.</strong>
+                </div>
+
+                <div class="alert alert-warning" id="errorMessage">
+                    <strong>Failure! Unexpected error occured while saving a record.</strong>
+                </div>
             </div>
-
-
-            
         </div>
     </div>
 </div>

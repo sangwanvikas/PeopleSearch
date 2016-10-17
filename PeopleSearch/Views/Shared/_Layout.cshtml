@@ -22,15 +22,19 @@
                 </button>
                 @Html.ActionLink("The People Search", "Search", "Person", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-
-            <div class="navbar-collapse collapse navbar-right">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Search", "Search", "Person")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Person")</li>
+            <div class="navbar-collapse collapse navbar-left">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Connectionstring", "Index", "Person")</li>
                 </ul>
+              </div>
+                <div class="navbar-collapse collapse navbar-right">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Search", "Search", "Person")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Person")</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
     <div class="container body-content">
         @RenderBody()
         @*<footer class="do">
@@ -43,6 +47,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/common/registerJs")
     @Scripts.Render("~/bundles/common/searchJs")
+    @Scripts.Render("~/bundles/common/indexJS")
     @RenderSection("scripts", required: false)
 </body>
 </html>

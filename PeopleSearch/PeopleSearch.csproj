@@ -197,9 +197,11 @@
     <Compile Include="ViewModels\PersonViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Common\css\index.css" />
     <Content Include="Common\css\result.css" />
     <Content Include="Common\css\register.css" />
     <Content Include="Common\css\search.css" />
+    <Content Include="Common\js\index.js" />
     <Content Include="Common\js\register.js" />
     <Content Include="Common\js\search.js" />
     <Content Include="Content\bootstrap.css" />

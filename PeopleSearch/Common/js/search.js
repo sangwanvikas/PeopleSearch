@@ -8,7 +8,7 @@ function SearchPerson(e) {
         data: name,
         success: function (msg) {
             hideProgress();
-            $('#peepleDetails').html(msg);            
+            $('#peopleDetails').html(msg);            
         },
         error: function (f) {
             console.log(f);
