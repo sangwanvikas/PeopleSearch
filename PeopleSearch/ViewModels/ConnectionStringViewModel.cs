@@ -10,6 +10,10 @@ namespace PeopleSearch.ViewModels
     {
         // "connectionString=Data Source=LENOVO-PC\SQLEXPRESS;Database=person;Integrated Security=True"
         [Required]
+        [StringLength(100, ErrorMessage = "Connection name can't be empty")]
+        public string Name { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "Server name can't be empty")]
         public string ServerNameValue { get; set; }
 
@@ -23,13 +27,22 @@ namespace PeopleSearch.ViewModels
 
         [Required]
         [StringLength(100, ErrorMessage = "Custom server instance can't be empty", MinimumLength = 1)]
-        public string SqlServerInstanveValue { get; set; }
+        public string SqlServerInstanceValue { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Database name can't be empty", MinimumLength = 1)]
         public string DatabaseValue { get; set; }
                 
         public bool IntegratedSecurityValue { get; set; }
+
+
+        [Required]
+        [StringLength(100, ErrorMessage = "This field can't be empty", MinimumLength = 1)]
+        public string FinalConfigurationString { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "This field can't be empty", MinimumLength = 1)]
+        public string ProviderName { get; set; }
 
 
         public ConnectionStringViewModel()
@@ -40,15 +53,14 @@ namespace PeopleSearch.ViewModels
             IntegratedSecurityValue = default(bool);
         }
 
-        //public override string ToString()
-        //{
-        //    string connectionStringValue = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}",
-        //        Constants.ConnectionString, Constants.Equal,
-        //        Constants.DataSource, Constants.Equal, ServerNameValue, Constants.ForwardSlash, SqlServerInstanveValue, Constants.SemiColon,
-        //        Constants.Database, Constants.Equal, DatabaseValue, Constants.SemiColon,
-        //        Constants.IntegratedSecurity, Constants.Equal, IntegratedSecurityValue.ToString());
+        public override string ToString()
+        {
+            string connectionStringValue = String.Format(@"{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}",
+                Constants.DataSource, Constants.Equal, ServerNameValue, Constants.ForwardSlash, SqlServerInstanceValue, Constants.SemiColon,
+                Constants.Database, Constants.Equal, DatabaseValue, Constants.SemiColon,
+                Constants.IntegratedSecurity, Constants.Equal, IntegratedSecurityValue.ToString());
 
-        //    return connectionStringValue;
-        //}
+            return connectionStringValue;
+        }
     }
 }

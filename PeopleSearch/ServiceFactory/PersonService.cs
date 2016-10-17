@@ -43,5 +43,10 @@ namespace PeopleSearch.ServiceFactory
                 return null;
         }
 
+        public int RecordsCount()
+        {
+            return _provider.RecordsCount();
+        }
+
     }
 }

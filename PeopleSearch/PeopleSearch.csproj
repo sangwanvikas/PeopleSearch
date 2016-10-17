@@ -177,7 +177,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\PersonController.cs" />
-    <Compile Include="DAL\IPersonContext.cs" />
     <Compile Include="DAL\PersonContext.cs" />
     <Compile Include="DAL\PersonDBInitializer.cs" />
     <Compile Include="DAL\PersonProvider.cs" />
@@ -249,6 +248,7 @@
     <Content Include="Views\Person\Search.cshtml" />
     <Content Include="Views\Person\Register.cshtml" />
     <Content Include="Views\Person\Result.cshtml" />
+    <Content Include="Views\Person\ConfigurationResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

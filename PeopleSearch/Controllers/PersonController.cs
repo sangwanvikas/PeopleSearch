@@ -10,6 +10,8 @@ using PeopleSearch.Helper;
 using Microsoft.Win32;
 using System.Web.Configuration;
 using System.Configuration;
+using System.Data.Common;
+using System.Reflection;
 
 namespace PeopleSearch.Controllers
 {
@@ -24,25 +26,51 @@ namespace PeopleSearch.Controllers
             try
             {
                 ConnectionStringViewModel conStringVM = new ConnectionStringViewModel();
-                conStringVM.ServerNameValue = ConnectionStringHelper.GetServerName();
-                conStringVM.SqlServerInstances = ConnectionStringHelper.GetSqlInstanceNames();
-                conStringVM.DatabaseValue = @"person";
-                conStringVM.IntegratedSecurityValue = true;
+                conStringVM = ConnectionStringHelper.GetDefaultConnectionString();
 
                 return View(conStringVM);
             }
             catch (Exception)
             {
 
-                throw;
+                return View(new ConnectionStringViewModel());
             }
 
         }
 
         #region ConnectionString
-        public ActionResult SetConnectionString(ConnectionString conStringVM)
+        public ActionResult ConfigurationResult(ConnectionString conString)
         {
-            return Json(conStringVM);
+
+            string finalConnectionString = conString.ToString();
+            string provider = conString.ProviderName;
+
+            var settings = ConfigurationManager.ConnectionStrings[Constants.ConnectionStringName];
+            var fi = typeof(ConfigurationElement).GetField("_bReadOnly", BindingFlags.Instance | BindingFlags.NonPublic);
+            fi.SetValue(settings, false);
+
+            settings.ConnectionString = finalConnectionString;
+            settings.ProviderName = conString.ProviderName;
+
+            _personManager = new PersonManager();
+            string successOrErrorMsg = _personManager.SaveSeedData();
+            conString.Message = successOrErrorMsg;
+            return View(conString);
+
+            //if (true)
+            //{
+            //    conString.Status = "SUCCESS";
+            //    conString.Message = "Valid connection string. On the top right corenr of the page, click on Register link to add new person or click on Search link to find persons from seed data.";
+            //    return View(conString);
+            //}
+            //else
+            //{
+            //    conString.Status = "ERROR";
+            //    conString.Message = "Not a valid connection string. Please go back to configuration page and try with new connection string";
+            //    return View(conString);
+            //}
+            return View(conString);
+
         }
         #endregion
 

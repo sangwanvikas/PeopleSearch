@@ -105,5 +105,23 @@ namespace PeopleSearch.ServiceFactory
 
             return personViewModelList;
         }
+
+
+
+
+        public string SaveSeedData()
+        {
+            try
+            {
+               int recordsCount = _personService.RecordsCount();
+
+                return "Connection established successfully. Seed data [" + recordsCount.ToString() + "] records saved in database!";
+            }
+            catch (Exception ex)
+            {
+
+                return ex.Message;
+            }
+        }
     }
 }

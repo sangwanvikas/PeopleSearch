@@ -42,5 +42,13 @@ namespace PeopleSearch.DAL
 
             return persons.ToList();
         }
+
+        public int RecordsCount()
+        {
+            int count = _db.Persons
+                         .Select (p=> p).Count();
+
+            return count;
+        }
     }
 }

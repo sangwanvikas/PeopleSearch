@@ -1,14 +1,37 @@
 ﻿@model PeopleSearch.ViewModels.ConnectionStringViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("SetConnectionString", "Person", FormMethod.Post))
+@using (Html.BeginForm("ConfigurationResult", "Person", FormMethod.Post))
 {
     @*// "connectionString=Data Source=LENOVO-PC\SQLEXPRESS;Database=person;Integrated Security=True"*@
-    <div class="page-header"><h1>Connection String</h1></div>
+    <div class="page-header"><h1>Configure ConnectionString</h1></div>
     <div class="container">
+        <div class="form-group">
+            <h2> Option I</h2>
+            <span>(This option works only for SQLServer provider with 'Windows Authentication')</span>
+        </div>
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Name (in webconfig):", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Name, new { @disabled = "true", @class = "name input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Provider name:", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.ProviderName, new { @class = "providerName input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.ProviderName, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class=" row">
             <div class="col-sm-2">
@@ -25,12 +48,12 @@
                 @Html.Label(@"Sql Instances:", new { @class = "" })
             </div>
             <div class="col-sm-9">
-                @Html.DropDownListFor(model => model.SqlServerInstances, new SelectList(Model.SqlServerInstances), new {@id="dropDown", @class = "input-xlarge-fluid" })
+                @Html.DropDownListFor(model => model.SqlServerInstances, new SelectList(Model.SqlServerInstances), new { @id = "dropDown", @class = "input-xlarge-fluid" })
                 <label for="formGroupExampleInput">Custom value:</label>
                 @Html.CheckBoxFor(Model => Model.isCustomInstance, new { id = "isCustomInstance", @selected = "false" })
 
-                @Html.TextBoxFor(model => model.SqlServerInstanveValue, new { @id = "instanceValue", @disabled = "true", maxlength = "255", placeholder = "Enter instance name", @class = "input-xlarge-fluid" })
-                @Html.ValidationMessageFor(model => model.SqlServerInstanveValue, "", new { @class = "text-danger" })
+                @Html.TextBoxFor(model => model.SqlServerInstanceValue, new { @id = "instanceValue", @disabled = "true", maxlength = "255", placeholder = "Enter instance name", @class = "input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.SqlServerInstanceValue, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -49,15 +72,71 @@
                 @Html.Label("Integrated Security:")
             </div>
             <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.IntegratedSecurityValue, new { disabled = true, maxlength = "255", placeholder = "Integrated Security", @class = "input-xlarge-fluid" })
+                @Html.TextBoxFor(model => model.IntegratedSecurityValue, new { @id = "integratedSecurityValue", disabled = true, maxlength = "255", placeholder = "Integrated Security", @class = "input-xlarge-fluid" })
                 @Html.ValidationMessageFor(model => model.IntegratedSecurityValue, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
-        <button type="submit">Configure SqlServer</button>
+        <button type="submit" id="btnSubmit">Configure</button>
+
+
+    </div>
+
+}
+<hr />
+@using (Html.BeginForm("ConfigurationResult", "Person", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <h2> Option II</h2>
+            <span>(For any database')</span>
+        </div>
+
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Name (in webconfig):", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Name, new { @disabled = "true", @class = "nanme input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Provider name:", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.ProviderName, new { @class = "providerName input-xlarge-fluid" })
+                @Html.ValidationMessageFor(model => model.ProviderName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class=" row">
+            <div class="col-sm-2">
+                @Html.Label(@"Value:", new { @class = "" })
+            </div>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.FinalConfigurationString, new
+                   {
+                       maxlength = "255",
+                       placeholder = @"Data Source=SERVER_NAME\SQL_INSTANCE_NAME;Database=DATABASE_NAME;Integrated Security=True_OR_FALSE (username and pwd also allowed)",
+                       @class = " form-control input-xlarge-fluid"
+                   })
+                <button type="submit" id="btnSubmit">Configure</button>
+                @Html.ValidationMessageFor(model => model.FinalConfigurationString, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
     </div>
 }
+
+@*@Html.Rend("ConfigurationResult", new PeopleSearch.Models.ConnectionString())*@
 
 @Scripts.Render("~/bundles/jquery")
 @Styles.Render("~/Common/css")
@@ -75,8 +154,20 @@
 
     $("#dropDown").change(function () {
         console.log($('#dropDown option:selected').val());
-        
+
         $('#instanceValue').val($('#dropDown option:selected').val());
     });
+
+    //$(".container").children().on('change', function () {
+    //    $('#finalConnectionString').html("hello");
+    //});
+    $('#btnSubmit').click(function () {
+        $('#instanceValue').attr("disabled", false);
+        $('#integratedSecurityValue').attr("disabled", false);
+        $('.name').attr('disabled', false);
+        $('.providerName').attr('disabled', false);
+
+    })
+
 </script>
 

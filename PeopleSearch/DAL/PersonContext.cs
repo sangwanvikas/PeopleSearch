@@ -10,7 +10,7 @@ namespace PeopleSearch.DAL
 {
     public class PersonContext : DbContext
     {
-        public PersonContext() : base("Data Source=LENOVO-PC\\SQLEXPRESS;Database=person;Integrated Security=True")
+        public PersonContext() : base("PersonContext")
         {
             Database.SetInitializer(new PersonDBInitializer());
 
