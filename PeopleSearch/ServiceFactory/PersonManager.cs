@@ -122,7 +122,7 @@ namespace PeopleSearch.ServiceFactory
             {
                 int recordsCount = _personService.RecordsCount();
 
-                return "Connection established successfully. Seed data [" + recordsCount.ToString() + "] records saved in database!";
+                return "Success ! Connection established successfully. Number of person records in database :  " + recordsCount.ToString() + ".";
             }
             catch (Exception ex)
             {

@@ -80,7 +80,7 @@ function RegisterPerson() {
             error: function (err) {
                 console.log("Error occured while saving a person's record");
                 $('#errorMessage').html('Failure! Unexpected error occured while saving a record.');
-                $('#errorMessage').attr('class', 'alert alert-warning')
+                $('#errorMessage').attr('class', 'alert alert-warning   ')
             }
         });
     } else {
